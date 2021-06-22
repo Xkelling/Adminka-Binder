@@ -4,13 +4,13 @@ require "lib.moonloader"
 --
 local dlstatus = require('moonloader').download_status
 update_state = false
-local script_vers = 1.0
-local script_vers_text = "v1.0"
+local script_vers = 1.1
+local script_vers_text = "v1.1"
 
 local update_url = "https://raw.githubusercontent.com/Xkelling/AutoUpdate/main/update.ini" -- тут тоже свою ссылку
 local update_path = getWorkingDirectory() .. "/update.ini" -- и тут свою ссылку
 
-local script_url = "" -- тут свою ссылку
+local script_url = "https://github.com/Xkelling/AutoUpdate/raw/main/Adminka_Binder.lua" -- тут свою ссылку
 local script_path = thisScript().path
 --
 require 'lib.vkeys'
@@ -390,7 +390,7 @@ end
 function main()
 if not isSampfuncsLoaded() or not isSampLoaded() then return end
 while not isSampAvailable() do wait(100) end
-sampAddChatMessage("{69b2ff}>>Adminka Binder v1.0<< {FFFFFF}Активация - /adm", -1)
+sampAddChatMessage("{69b2ff}>>Adminka Binder v1.1<< {FFFFFF}Активация - /adm", -1)
 sampRegisterChatCommand("adm", cmd_adm)
 sampRegisterChatCommand("cc", cmd_cc)
 imgui.Process = false
@@ -401,7 +401,7 @@ downloadUrlToFile(update_url, update_path, function(id, status)
 		if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 				updateIni = inicfg.load(nil, update_path)
 				if tonumber(updateIni.info.vers) > script_vers then
-						sampAddChatMessage("{69b2ff}>>Adminka Binder v1.0<< {FFFFFF}Есть обновление! Версия: " .. updateIni.info.vers_text, -1)
+						sampAddChatMessage("{69b2ff}>>Adminka Binder v1.1<< {FFFFFF}Есть обновление! Версия: " .. updateIni.info.vers_text, -1)
 						update_state = true
 				end
 				os.remove(update_path)
@@ -414,7 +414,7 @@ while true do
 		if update_state then
 				downloadUrlToFile(script_url, script_path, function(id, status)
 						if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-								sampAddChatMessage("{69b2ff}>>Adminka Binder v1.0<< {FFFFFF}Скрипт успешно обновлен!", -1)
+								sampAddChatMessage("{69b2ff}>>Adminka Binder v1.1<< {FFFFFF}Скрипт успешно обновлен!", -1)
 								thisScript():reload()
 						end
 				end)
