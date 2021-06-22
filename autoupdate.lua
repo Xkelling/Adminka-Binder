@@ -1,8 +1,8 @@
-script_name('Autoupdate script') -- íàçâàíèå ñêðèïòà
-script_author('FORMYS') -- àâòîð ñêðèïòà
-script_description('Autoupdate') -- îïèñàíèå ñêðèïòà
+script_name('Autoupdate script') -- название скрипта
+script_author('FORMYS') -- автор скрипта
+script_description('Autoupdate') -- описание скрипта
 
-require "lib.moonloader" -- ïîäêëþ÷åíèå áèáëèîòåêè
+require "lib.moonloader" -- подключение библиотеки
 local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 local keys = require "vkeys"
@@ -16,10 +16,10 @@ update_state = false
 local script_vers = 2.0
 local script_vers_text = "v2.0"
 
-local update_url = "https://raw.githubusercontent.com/Xkelling/AutoUpdate/main/update.ini" -- òóò òîæå ñâîþ ññûëêó
-local update_path = getWorkingDirectory() .. "/update.ini" -- è òóò ñâîþ ññûëêó
+local update_url = "https://raw.githubusercontent.com/Xkelling/AutoUpdate/main/update.ini" -- тут тоже свою ссылку
+local update_path = getWorkingDirectory() .. "/update.ini" -- и тут свою ссылку
 
-local script_url = "https://github.com/Xkelling/AutoUpdate/raw/main/autoupdate.lua" -- òóò ñâîþ ññûëêó
+local script_url = "https://github.com/Xkelling/AutoUpdate/raw/main/autoupdate.lua" -- тут свою ссылку
 local script_path = thisScript().path
 
 
@@ -36,7 +36,7 @@ function main()
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
             if tonumber(updateIni.info.vers) > script_vers then
-                sampAddChatMessage("Åñòü îáíîâëåíèå! Âåðñèÿ: " .. updateIni.info.vers_text, -1)
+                sampAddChatMessage("Есть обновление! Версия: " .. updateIni.info.vers_text, -1)
                 update_state = true
             end
             os.remove(update_path)
@@ -49,7 +49,7 @@ function main()
         if update_state then
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    sampAddChatMessage("Ñêðèïò óñïåøíî îáíîâëåí!", -1)
+                    sampAddChatMessage("Скрипт успешно обновлен!", -1)
                     thisScript():reload()
                 end
             end)
@@ -60,5 +60,5 @@ function main()
 end
 
 function cmd_update(arg)
-    sampShowDialog(1000, "Àâòîîáíîâëåíèå v2.0", "{FFFFFF}Ýòî óðîê ïî îáíîâëåíèþ\n{FFF000}Íîâàÿ âåðñèÿ", "Çàêðûòü", "", 0)
+    sampShowDialog(1000, "Автообновление v2.0", "{FFFFFF}Это урок по обновлению\n{FFF000}Новая версия", "Закрыть", "", 0)
 end
