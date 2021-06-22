@@ -407,21 +407,6 @@ downloadUrlToFile(update_url, update_path, function(id, status)
 				os.remove(update_path)
 		end
 end)
-
-while true do
-		wait(0)
-
-		if update_state then
-				downloadUrlToFile(script_url, script_path, function(id, status)
-						if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-								sampAddChatMessage("{69b2ff}>>Adminka Binder v1.1<< {FFFFFF}Скрипт успешно обновлен!", -1)
-								thisScript():reload()
-						end
-				end)
-				break
-		end
-
-end
 --
 
 while true do
@@ -433,6 +418,18 @@ if F2.v then
 		imgui.ShowCursor = not imgui.ShowCursor
 	end
 end
+
+--
+if update_state then
+		downloadUrlToFile(script_url, script_path, function(id, status)
+				if status == dlstatus.STATUS_ENDDOWNLOADDATA then
+						sampAddChatMessage("{69b2ff}>>Adminka Binder v1.1<< {FFFFFF}Скрипт успешно обновлен!", -1)
+						thisScript():reload()
+				end
+		end)
+		break
+end
+--
 
 end
 end
